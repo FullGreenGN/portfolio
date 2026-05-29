@@ -30,27 +30,23 @@ export default function ContactSection() {
         </h2>
         {lang === "fr" ? (
           <p className="mx-auto max-w-lg text-muted-foreground text-balance text-sm sm:text-base leading-relaxed">
-            Vous voulez discuter ? Envoyez-moi un message{" "}
+            Vous voulez discuter ? Envoyez-moi simplement un e-mail{" "}
             <Link
-              href={DATA_COMMON.contact.social.X.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${DATA_COMMON.contact.email}`}
               className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
             >
-              avec une question directe sur Twitter
+              à {DATA_COMMON.contact.email}
             </Link>{" "}
             et je vous répondrai dès que possible. Je ne répondrai à aucun démarchage.
           </p>
         ) : (
           <p className="mx-auto max-w-lg text-muted-foreground text-balance text-sm sm:text-base leading-relaxed">
-            Want to chat? Just shoot me a dm{" "}
+            Want to chat? Just send me an email{" "}
             <Link
-              href={DATA_COMMON.contact.social.X.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`mailto:${DATA_COMMON.contact.email}`}
               className="text-blue-500 hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
             >
-              with a direct question on twitter
+              at {DATA_COMMON.contact.email}
             </Link>{" "}
             and I&apos;ll respond whenever I can. I will ignore all
             soliciting.
