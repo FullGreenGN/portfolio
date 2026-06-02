@@ -2,13 +2,18 @@
 
 import BlurFade from "@/components/magicui/blur-fade";
 import { ProjectCard } from "@/components/project-card";
-import { DATA_COMMON } from "@/data/resume";
+import {DATA_COMMON, DATA_LANG} from "@/data/resume";
 import { useLanguage } from "@/components/language-provider";
 
 const BLUR_FADE_DELAY = 0.04;
 
 export default function ProjectsSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+
+  const DATA = {
+    ...DATA_COMMON,
+    ...DATA_LANG[lang],
+  };
 
   return (
     <section id="projects">
@@ -33,7 +38,7 @@ export default function ProjectsSection() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto auto-rows-fr">
-          {DATA_COMMON.projects.map((project: any, id: number) => (
+          {DATA.projects.map((project: any, id: number) => (
             <BlurFade
               key={project.title}
               delay={BLUR_FADE_DELAY * 12 + id * 0.05}
