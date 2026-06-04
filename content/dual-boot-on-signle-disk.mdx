@@ -1,0 +1,50 @@
+---
+title: "Setting Up Dual Boot: Windows and Fedora on a Single NVMe"
+publishedAt: "2024-06-04"
+updatedAt: "2024-06-04"
+author: "Jean-Luc O."
+summary: "A complete guide to installing Windows and Fedora on the same NVMe with GRUB bootloader, Secure Boot, and TPM enabled for a seamless development environment."
+image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=192&fit=crop"
+---
+
+# Setting Up Dual Boot: Windows and Fedora on a Single NVMe
+
+Running multiple operating systems on a single machine opens up possibilities. You get the gaming and professional software ecosystem of Windows alongside the flexibility and developer-friendly tools of Linux. The key is doing it right from the start so both systems coexist peacefully.
+
+This guide walks you through partitioning a single NVMe, installing both operating systems, and configuring GRUB to manage the boot process. We'll also ensure Secure Boot and TPM stay enabled throughout, which matters if you need them for specific applications.
+
+## Prerequisites and preparation
+
+Before touching your hardware, back up everything that matters. Your development projects, SSH keys, Git configurations, browser bookmarks, and any credentials you've stored locally. Use an external drive or a secondary disk for this. Note which applications you use regularly so you can reinstall them after Windows is fresh.
+
+Prepare a bootable USB with Ventoy, then add two ISO files to it: Windows (from Microsoft's official site) and Fedora (from fedoraproject.org). Copy these ISO files to the root of your Ventoy drive and it will detect both automatically.
+
+## BIOS configuration
+
+Restart your machine and enter the BIOS by pressing Delete or F2 during startup. Navigate to the Security tab. Enable TPM Module (look for "TPM Device" or similar) and enable Secure Boot. Save your changes with F10 and confirm. This step ensures both operating systems respect your security settings from the moment you install them.
+
+## Preparing your storage
+
+Boot from your Ventoy USB and select a Linux live environment or GParted if available. Open GParted and select your first NVMe. Create two partitions: one 500 GB for Windows, another 500 GB for Fedora, leaving the final 5-10 GB untouched for drive health. Apply the changes and reboot.
+
+## Installing Windows
+
+Boot from Ventoy again and select the Windows ISO. When the installer asks where to install Windows, choose your first 500 GB partition. Complete the installation and let Windows restart as needed. Once you're at the desktop, reinstall your essential development tools: Git, your code editor, compilers, Docker, and anything else you use daily. Run Windows updates to ensure stability, then reboot.
+
+## Installing Fedora
+
+Boot from Ventoy one more time and select the Fedora ISO. The Fedora installer will detect your second 500 GB partition automatically. Select it and let Fedora create its own partitions (root, home, swap) within that space. When prompted for where to install the bootloader, select your NVMe itself, not a specific partition. This allows GRUB to manage both operating systems. If you see a MOK (Machine Owner Key) screen during installation, accept it to sign the Fedora bootloader securely under Secure Boot. Complete the installation and reboot.
+
+## Verifying the dual boot
+
+After the first restart, you'll see the GRUB menu listing both Fedora and Windows Boot Manager. Select whichever you want to use. If Windows doesn't appear in GRUB, don't worry, you can press F12 at startup to manually select your NVMe from the ASUS boot menu.
+
+Once in Fedora, open a terminal and install NVIDIA drivers for your RTX 3070: `sudo dnf install akmod-nvidia` then reboot. Fedora compiles the drivers automatically for your kernel.
+
+## Final setup
+
+Install your development tools on Fedora from the dnf repositories. Node.js, Python, Git, Docker, and most other tools are readily available. Configure your 2 TB HDD as shared storage by creating an NTFS partition accessible from both systems, or simply keep it for Windows since Fedora can read NTFS without issues.
+
+## The result
+
+You now have a stable, secure dual-boot system with Secure Boot and TPM active on both sides. GRUB handles the boot process seamlessly, and you can switch between operating systems without compromising security or performance. Development work flows naturally on Fedora while gaming and professional applications run smoothly on Windows.
