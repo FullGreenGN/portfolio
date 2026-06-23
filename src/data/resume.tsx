@@ -307,7 +307,7 @@ export const DATA_LANG = {
                 description: "B2B2C marketplace platform tailored for festivals and large-scale events. Features a micro-services architecture using Next.js and Expo, with atomic financial management powered by Stripe Connect for multi-vendor settlements.",
                 technologies: ["Next.js", "Expo", "tRPC", "Prisma", "PostgreSQL", "Stripe Connect", "Docker"],
                 links: [{ type: "Website", href: "https://shoteat.live", icon: <Icons.globe className="size-3" /> }],
-                image: "/shoteat-project.png",
+                image: "/shoteat.png",
                 video: "",
             },
             {
